@@ -1,27 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 import { Observable } from 'rxjs/internal/Observable';
+import { select, Store } from '@ngrx/store';
+import { Alarm } from './store/alarm-model';
+import * as fromRoot from './store';
+import * as fromAlarm from './store/alarm-reducer';
+import * as fromAlarmActions from './store/alarm-actions';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-    title = 'app';
+
+    public alarms$: Observable<Alarm[]>;
 
     get clock$(): Observable<Date> {
         return this.appService.clock;
     }
 
-    constructor( private appService: AppService ) {
+    constructor( private appService: AppService,
+                 private store: Store<fromRoot.State> ) {
     }
 
     public ngOnInit(): void {
         this.appService.runClock();
+        this.alarms$ = this.store.pipe(select(fromRoot.getAlarms));
     }
 
     public handleAlarmAdd( alarmValue: Date ) {
-        console.log(alarmValue);
+        this.store.dispatch(new fromAlarmActions.AddAlarm(alarmValue));
     }
 }

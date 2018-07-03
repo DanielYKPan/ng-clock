@@ -13,6 +13,8 @@ import {
 import { ClockComponent } from './clock/clock.component';
 import { AlarmInputComponent } from './alarm-input/alarm-input.component';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store';
 
 const MY_NATIVE_FORMATS = {
     fullPickerInput: {
@@ -41,6 +43,9 @@ const MY_NATIVE_FORMATS = {
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+
+        // NG Store
+        StoreModule.forRoot(reducers),
 
         // OwlDateTime Picker
         OwlDateTimeModule,
