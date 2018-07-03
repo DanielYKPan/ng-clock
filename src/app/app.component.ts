@@ -20,4 +20,8 @@ export class AppComponent implements OnInit {
     public ngOnInit(): void {
         this.appService.runClock();
     }
+
+    public handleAlarmAdd( alarmValue: Date ) {
+        console.log(alarmValue);
+    }
 }

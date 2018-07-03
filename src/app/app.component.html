@@ -3,6 +3,8 @@
 </mat-toolbar>
 <!--The content below is only a placeholder and can be replaced.-->
 <app-clock [now]="clock$ | async"></app-clock>
+<app-alarm-input (add)="handleAlarmAdd($event)"></app-alarm-input>
+
 <div style="text-align:center">
     <h1>
         Welcome to {{ title }}!
