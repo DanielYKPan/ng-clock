@@ -36,4 +36,12 @@ export class AppComponent implements OnInit {
     public handleAlarmCancel( alarm: Alarm ) {
         this.store.dispatch(new fromAlarmActions.RemoveAlarm(alarm.id));
     }
+
+    public handleAlarmToggle( alarm: Alarm ) {
+        if (alarm.in) {
+            this.store.dispatch(
+                new fromAlarmActions.ToggleAlarmStatus({id: alarm.id, status: !alarm.status})
+            );
+        }
+    }
 }

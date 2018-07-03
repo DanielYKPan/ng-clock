@@ -16,7 +16,8 @@
     <ng-container matColumnDef="status">
         <mat-header-cell class="alarm-table-cell alarm-table-status-column" *matHeaderCellDef> Status </mat-header-cell>
         <mat-cell class="alarm-table-cell alarm-table-status-column" *matCellDef="let element">
-            <button mat-icon-button [color]="element.status? 'primary' : ''">
+            <button mat-icon-button [color]="element.status? 'primary' : ''"
+                    (click)="handleToggleBtnClick($event, element)">
                 <mat-icon aria-label="Toggle Alarm Status">alarm</mat-icon>
             </button>
         </mat-cell>
@@ -33,5 +34,5 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row [class.alarm-table-disable-row]="!row.status" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row [class.alarm-table-disable-row]="!row.in" *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </table>

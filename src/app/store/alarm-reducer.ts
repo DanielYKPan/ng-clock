@@ -30,13 +30,14 @@ export function uuid() {
 export function reducer( state = initialState, action: AlarmActions ): State {
     switch (action.type) {
         case AlarmActionTypes.AddAlarm:
-            console.log(action.payload);
             const dateTime = action.payload;
             const now = new Date();
+            const status = dateTime.getTime() - now.getTime() >= 0;
             const newAlarm = {
                 id: uuid(),
                 date_time: dateTime,
-                status: dateTime.getTime() - now.getTime() >= 0
+                status: status,
+                in: status
             };
 
             return {

@@ -13,6 +13,8 @@ export class AlarmListComponent implements OnInit {
 
     @Output() cancelAlarm = new EventEmitter<Alarm>();
 
+    @Output() toggleAlarm = new EventEmitter<Alarm>();
+
     public displayedColumns: string[] = ['position', 'moment', 'status', 'action'];
 
     constructor() {
@@ -23,6 +25,11 @@ export class AlarmListComponent implements OnInit {
 
     public handleCancelBtnClick( event: any, alarm: Alarm ) {
         this.cancelAlarm.emit(alarm);
+        event.preventDefault();
+    }
+
+    public handleToggleBtnClick( event: any, alarm: Alarm ) {
+        this.toggleAlarm.emit(alarm);
         event.preventDefault();
     }
 }
