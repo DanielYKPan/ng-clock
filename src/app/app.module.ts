@@ -7,7 +7,7 @@ import {
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
+    MatInputModule, MatTableModule,
     MatToolbarModule
 } from '@angular/material';
 import { ClockComponent } from './clock/clock.component';
@@ -15,6 +15,7 @@ import { AlarmInputComponent } from './alarm-input/alarm-input.component';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store';
+import { AlarmListComponent } from './alarm-list/alarm-list.component';
 
 const MY_NATIVE_FORMATS = {
     fullPickerInput: {
@@ -37,6 +38,7 @@ const MY_NATIVE_FORMATS = {
         AppComponent,
         ClockComponent,
         AlarmInputComponent,
+        AlarmListComponent,
     ],
     imports: [
         // Angular
@@ -57,6 +59,7 @@ const MY_NATIVE_FORMATS = {
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
+        MatTableModule,
     ],
     providers: [
         {provide: OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS},

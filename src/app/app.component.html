@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
-    <mat-icon class="header-icon">alarm</mat-icon> NG Alarm
+    <mat-icon class="header-icon">alarm</mat-icon>
+    NG Alarm
 </mat-toolbar>
 <!--The content below is only a placeholder and can be replaced.-->
 <app-clock [now]="clock$ | async"></app-clock>
 <app-alarm-input (add)="handleAlarmAdd($event)"></app-alarm-input>
-
-<div *ngFor="let alarm of (alarms$ | async)">{{alarm.date_time}}</div>
+<app-alarm-list [dataSource]="alarms$ | async" (cancelAlarm)="handleAlarmCancel($event)"></app-alarm-list>

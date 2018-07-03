@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { select, Store } from '@ngrx/store';
 import { Alarm } from './store/alarm-model';
 import * as fromRoot from './store';
-import * as fromAlarm from './store/alarm-reducer';
 import * as fromAlarmActions from './store/alarm-actions';
 
 @Component({
@@ -32,5 +31,9 @@ export class AppComponent implements OnInit {
 
     public handleAlarmAdd( alarmValue: Date ) {
         this.store.dispatch(new fromAlarmActions.AddAlarm(alarmValue));
+    }
+
+    public handleAlarmCancel( alarm: Alarm ) {
+        this.store.dispatch(new fromAlarmActions.RemoveAlarm(alarm.id));
     }
 }

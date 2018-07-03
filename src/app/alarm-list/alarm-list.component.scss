@@ -1,0 +1,22 @@
+.alarm-table {
+  width: 98%;
+  max-width: 450px;
+
+  .alarm-table-moment-column {
+    flex: 3;
+  }
+
+  .alarm-table-disable-row {
+    .alarm-table-cell:not(.alarm-table-action-column) {
+      opacity: .4;
+    }
+  }
+}
+
+.alarm-status {
+  cursor: pointer;
+
+  &.alarm-status-on {
+    color: #3f51b5;
+  }
+}
