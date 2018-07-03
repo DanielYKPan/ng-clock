@@ -2,6 +2,7 @@
     <mat-icon class="header-icon">alarm</mat-icon> NG Alarm
 </mat-toolbar>
 <!--The content below is only a placeholder and can be replaced.-->
+<app-clock [now]="clock$ | async"></app-clock>
 <div style="text-align:center">
     <h1>
         Welcome to {{ title }}!
