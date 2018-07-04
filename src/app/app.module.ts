@@ -8,6 +8,7 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSnackBarModule,
     MatTableModule,
     MatToolbarModule
 } from '@angular/material';
@@ -61,6 +62,7 @@ const MY_NATIVE_FORMATS = {
         MatInputModule,
         MatButtonModule,
         MatTableModule,
+        MatSnackBarModule,
     ],
     providers: [
         {provide: OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS},

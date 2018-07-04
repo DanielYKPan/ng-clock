@@ -52,6 +52,23 @@ export function reducer( state = initialState, action: AlarmActions ): State {
             };
         }
 
+        case AlarmActionTypes.TurnOffAlarms: {
+            const nowMoment = new Date();
+            const alarms = state.alarms.map(( alarm: Alarm ) => {
+                const off = nowMoment.getTime() - alarm.date_time.getTime() >= 0;
+                if (off && alarm.status) {
+                    alarm.status = false;
+                    alarm.in = false;
+                }
+
+                return alarm;
+            });
+
+            return {
+                alarms
+            };
+        }
+
         case AlarmActionTypes.ToggleAlarmStatus: {
             const alarms = state.alarms.map(( alarm: Alarm ) => {
                 if (alarm.id === action.payload.id) {

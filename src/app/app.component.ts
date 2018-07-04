@@ -7,6 +7,7 @@ import * as fromRoot from './store';
 import * as fromAlarmActions from './store/alarm-actions';
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import { map } from 'rxjs/operators';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material';
 
 @Component({
     selector: 'app-root',
@@ -22,12 +23,15 @@ export class AppComponent implements OnInit {
 
     public isPlaying: boolean = false;
 
+    private snackBarRef: MatSnackBarRef<any>;
+
     get clock$(): Observable<Date> {
         return this.appService.clock;
     }
 
     constructor( private appService: AppService,
-                 private store: Store<fromRoot.State> ) {
+                 private store: Store<fromRoot.State>,
+                 private snackBar: MatSnackBar ) {
     }
 
     public ngOnInit(): void {
@@ -39,8 +43,9 @@ export class AppComponent implements OnInit {
                 return this.checkAlarm(alarms, clockTime);
             })
         ).subscribe(( alarm ) => {
-            alarm ?
-                this.playAlarmRing() : this.pauseAlarmRing();
+            if (alarm) {
+                this.playAlarmRing();
+            }
         });
     }
 
@@ -74,6 +79,7 @@ export class AppComponent implements OnInit {
         if (!this.isPlaying) {
             console.log('playing');
             this.alarmAudioElmRef.nativeElement.play();
+            this.openSnackBar();
             this.isPlaying = true;
         }
 
@@ -88,5 +94,23 @@ export class AppComponent implements OnInit {
         }
 
         return;
+    }
+
+    private openSnackBar() {
+        if (this.snackBarRef) {
+            this.snackBarRef = null;
+        }
+        this.snackBarRef = this.snackBar.open('Alarm Ringing!!!', 'Dismiss');
+
+        this.snackBarRef.onAction().subscribe(() => {
+            this.turnOffAlarms();
+        });
+    }
+
+    private turnOffAlarms(): void {
+        this.store.dispatch(new fromAlarmActions.TurnOffAlarms());
+        this.pauseAlarmRing();
+        this.snackBarRef.dismiss();
+        this.snackBarRef = null;
     }
 }
