@@ -8,3 +8,4 @@
 <app-alarm-list [dataSource]="alarms$ | async"
                 (toggleAlarm)="handleAlarmToggle($event)"
                 (cancelAlarm)="handleAlarmCancel($event)"></app-alarm-list>
+<audio #alarmAudio src="../assets/audio/alarm.wav" type="audio/wav" loop id="alarm_audio"></audio>

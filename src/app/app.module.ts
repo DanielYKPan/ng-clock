@@ -7,7 +7,8 @@ import {
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule, MatTableModule,
+    MatInputModule,
+    MatTableModule,
     MatToolbarModule
 } from '@angular/material';
 import { ClockComponent } from './clock/clock.component';
